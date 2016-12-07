@@ -41,22 +41,37 @@ def task1(n):
 def task2_1():
 	g = Graph(directed=False)
 	g = g.Load('edges.txt', format='edgelist', directed=False)
+
 	print '{} {}'.format('#edges:',g.ecount())
 	print '{} {}'.format('#nodes:',g.vcount())
 	print '{} {}'.format('diameter:',g.diameter())
 	print '{} {:.3f}'.format('transitivity',g.transitivity_undirected())
+
 	degrees = g.degree(g.vs)
 	plt.hist(degrees,bins=g.maxdegree()); plt.title('degree distribution')
 	plt.show(block=False)
+
 	weigths = g.pagerank()
 	g.vs['size'] = map(lambda x: x*1500, weigths)
 	plot(g, layout=g.layout_lgl())
 
 def task2_2():
+	g = Graph(directed=False)
+	g = g.Load('edges.txt', format='edgelist', directed=False)
 
+	com = g.community_edge_betweenness()
+	clust = com.as_clustering()
+	print 'largest community size:', clust.giant().vcount()
+
+	com_sizes = map(lambda s: s.vcount(),clust.subgraphs())
+	plt.hist(com_sizes,bins=max(com_sizes)); plt.title('community size distribution')
+	plt.show(block=False)
+
+	plot(clust, layout = g.layout_kamada_kawai())
 
 
 
 
 #task1(1000)
-task2_1()
+#task2_1()
+task2_2()
