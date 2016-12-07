@@ -46,13 +46,14 @@ def task2_1():
 	print '{} {}'.format('diameter:',g.diameter())
 	print '{} {:.3f}'.format('transitivity',g.transitivity_undirected())
 	degrees = g.degree(g.vs)
-	plt.hist(degrees,bins=50); plt.title('degree distribution')
+	plt.hist(degrees,bins=g.maxdegree()); plt.title('degree distribution')
 	plt.show(block=False)
 	weigths = g.pagerank()
 	g.vs['size'] = map(lambda x: x*1500, weigths)
 	plot(g, layout=g.layout_lgl())
 
-#def task2_2():
+def task2_2():
+
 
 
 
