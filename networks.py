@@ -72,6 +72,6 @@ def task2_2():
 
 
 
-#task1(1000)
+task1(1000)
 #task2_1()
-task2_2()
+#task2_2()
